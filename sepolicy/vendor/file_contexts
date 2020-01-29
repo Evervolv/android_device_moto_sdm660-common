@@ -52,7 +52,6 @@
 /sys/devices/platform/egis_input(/.*)?                        u:object_r:sysfs_fingerprint:s0
 /sys/devices/soc/0.et320(/.*)?                                u:object_r:sysfs_fingerprint:s0
 /dev/esfp0                                                    u:object_r:tee_device:s0
-/data/\.fps(/.*)?                                             u:object_r:system_fps_data_file:s0
 /data/vendor/misc/cutback(/.*)?                               u:object_r:cutback_data_file:s0
 /dev/socket/cutback                                           u:object_r:cutback_socket:s0
 /data/vendor/fpc(/.*)?                                        u:object_r:fingerprint_data_file:s0
