@@ -76,23 +76,6 @@ vendor.voice.path.for.pcm.voip=false
 vendor.audio.offload.min.duration.secs=60
 
 # Bluetooth
-bluetooth.device.class_of_device=90,2,12
-bluetooth.hardware.power.operating_voltage_mv=3300
-bluetooth.profile.a2dp.source.enabled?=true
-bluetooth.profile.asha.central.enabled?=true
-bluetooth.profile.avrcp.target.enabled?=true
-bluetooth.profile.bas.client.enabled?=true
-bluetooth.profile.gatt.enabled?=true
-bluetooth.profile.hfp.ag.enabled?=true
-bluetooth.profile.hid.device.enabled?=true
-bluetooth.profile.hid.host.enabled?=true
-bluetooth.profile.map.server.enabled?=true
-bluetooth.profile.opp.enabled?=true
-bluetooth.profile.pan.nap.enabled?=true
-bluetooth.profile.pan.panu.enabled?=true
-bluetooth.profile.pbap.server.enabled?=true
-bluetooth.profile.sap.server.enabled?=true
-persist.vendor.bt.aac_frm_ctl.enabled=true
 persist.vendor.qcom.bluetooth.a2dp_offload_cap=sbc-aptx-aptxhd-aac
 vendor.qcom.bluetooth.soc=cherokee
 
@@ -108,7 +91,7 @@ debug.media.codec2=2
 vendor.display.enable_default_color_mode=1
 
 # Display
-debug.renderengine.backend=skiaglthreaded
+debug.renderengine.backend=threaded
 debug.sf.hw=1
 debug.sf.latch_unsignaled=0
 vendor.gralloc.enable_fb_ubwc=1
@@ -170,7 +153,6 @@ persist.vendor.radio.add_power_save=1
 vendor.rild.libpath=/vendor/lib64/libril-qc-qmi-1.so
 persist.vendor.qc.sub.rdump.on=1
 persist.vendor.qc.sub.rdump.max=3
-ro.telephony.block_binder_thread_on_incoming_calls=false
 ro.telephony.call_ring.multiple=false
 ro.telephony.default_network=10,10
 ro.vendor.telephony.default_network=10,10
@@ -203,20 +185,8 @@ debug.sf.early_app_phase_offset_ns=1500000
 debug.sf.early_gl_phase_offset_ns=3000000
 debug.sf.early_gl_app_phase_offset_ns=15000000
 
-# HEH filename encryption is being dropped
-ro.crypto.volume.filenames_mode=aes-256-cts
-
 # USB
 persist.sys.usb.config.extra=none
-vendor.usb.rmnet.func.name=rmnet_bam
-vendor.usb.rmnet.inst.name=rmnet
-vendor.usb.rndis.func.name=rndis_bam
-
-# Watchdog
-ro.hw_timeout_multiplier=3
 
 # Wifi
 wifi.interface=wlan0
-
-# Zygote
-zygote.critical_window.minute=10

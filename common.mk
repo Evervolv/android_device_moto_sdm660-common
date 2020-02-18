@@ -34,9 +34,6 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
 # Keep this after including updatable_apex.mk
 PRODUCT_COMPRESSED_APEX := false
 
-# Properties
--include $(LOCAL_PATH)/properties.mk
-
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay \
        $(LOCAL_PATH)/overlay-ev
@@ -299,12 +296,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/privapp-permissions-qti.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/privapp-permissions-qti.xml \
     $(LOCAL_PATH)/configs/qti_whitelist.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sysconfig/qti_whitelist.xml
 
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    ro.vendor.qti.va_aosp.support=1
-
-PRODUCT_ODM_PROPERTIES += \
-    ro.vendor.qti.va_odm.support=1
-
 # OMX
 PRODUCT_PACKAGES += \
     libc2dcolorconvert \
@@ -403,7 +394,6 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_BOOT_JARS += \
     telephony-ext
-
 
 # Thermal
 PRODUCT_PACKAGES += \
