@@ -87,9 +87,7 @@ PRODUCT_PACKAGES += \
     camera.device@3.2-impl \
     libbson.vendor \
     libxml2 \
-    Snap \
-    android.frameworks.displayservice@1.0.vendor \
-    libgpu_mapper_shim
+    vendor.qti.hardware.camera.device@1.0:64
 
 # Cgroup and task_profiles
 PRODUCT_COPY_FILES += \

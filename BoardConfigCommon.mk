@@ -71,7 +71,6 @@ BUILD_BROKEN_VENDOR_PROPERTY_NAMESPACE := true
 
 # Camera
 USE_CAMERA_STUB := true
-TARGET_USES_QTI_CAMERA_DEVICE := true
 
 # Display
 OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
