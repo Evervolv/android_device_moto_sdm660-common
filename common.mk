@@ -30,6 +30,10 @@ PRODUCT_BROKEN_VERIFY_USES_LIBRARIES := true
 # Enable updating of APEXes
 $(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
 
+# Disable APEX compression
+# Keep this after including updatable_apex.mk
+PRODUCT_COMPRESSED_APEX := false
+
 # Properties
 -include $(LOCAL_PATH)/properties.mk
 
