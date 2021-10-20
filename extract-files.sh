@@ -31,6 +31,12 @@ SECTION=
 
 while [ "${#}" -gt 0 ]; do
     case "${1}" in
+        --only-common )
+                ONLY_COMMON=true
+                ;;
+        --only-target )
+                ONLY_TARGET=true
+                ;;
         -n | --no-cleanup )
                 CLEAN_VENDOR=false
                 ;;
@@ -58,13 +64,33 @@ function blob_fixup() {
         product/etc/permissions/vendor.qti.hardware.data.connection-V1.0-java.xml | product/etc/permissions/vendor.qti.hardware.data.connection-V1.1-java.xml)
             sed -i 's|xml version="2.0"|xml version="1.0"|g' "${2}"
             ;;
+        # Fix missing symbols
+        product/lib64/lib-imscamera.so | product/lib64/lib-imsvideocodec.so | product/lib/lib-imscamera.so | product/lib/lib-imsvideocodec.so)
+            for LIBGUI_SHIM in $(grep -L "libgui_shim.so" "${2}"); do
+                "${PATCHELF}" --add-needed "libgui_shim.so" "${LIBGUI_SHIM}"
+            done
+            ;;
+        # memset shim
+        vendor/bin/charge_only_mode)
+            for  LIBMEMSET_SHIM in $(grep -L "libmemset_shim.so" "${2}"); do
+                "${PATCHELF}" --add-needed "libmemset_shim.so" "$LIBMEMSET_SHIM"
+            done
+            ;;
+        # Fix missing symbols
+        vendor/lib/libmot_gpu_mapper.so)
+            for LIBGUI_SHIM in $(grep -L "libgui_shim_vendor.so" "${2}"); do
+                "${PATCHELF}" --add-needed "libgui_shim_vendor.so" "${LIBGUI_SHIM}"
+            done
+            ;;
         # Load wrapped shim
         vendor/lib64/libmdmcutback.so)
              "${PATCHELF}" --replace-needed "libqsap_sdk.so" "libqsap_shim.so" "${2}"
             ;;
         # Fix missing symbols
         vendor/lib64/libril-qc-hal-qmi.so)
-            "${PATCHELF}" --add-needed "libcutils_shim.so" "${2}"
+            for  LIBCUTILS_SHIM in $(grep -L "libcutils_shim.so" "${2}"); do
+                "${PATCHELF}" --add-needed "libcutils_shim.so" "$LIBCUTILS_SHIM"
+            done
             ;;
     esac
 }
@@ -76,7 +102,7 @@ if [ -z "${ONLY_TARGET}" ]; then
     extract "${MY_DIR}/proprietary-files.txt" "${SRC}" "${KANG}" --section "${SECTION}"
 fi
 
-if [ -s "${MY_DIR}/../${DEVICE}/proprietary-files.txt" ]; then
+if [ -z "${ONLY_COMMON}" ] && [ -s "${MY_DIR}/../${DEVICE}/proprietary-files.txt" ]; then
     # Reinitialize the helper for device
     source "${MY_DIR}/../${DEVICE}/extract-files.sh"
     setup_vendor "${DEVICE}" "${VENDOR}" "${ANDROID_ROOT}" false "${CLEAN_VENDOR}"
@@ -84,6 +110,4 @@ if [ -s "${MY_DIR}/../${DEVICE}/proprietary-files.txt" ]; then
     extract "${MY_DIR}/../${DEVICE}/proprietary-files.txt" "${SRC}" "${KANG}" --section "${SECTION}"
 fi
 
-COMMON_BLOB_ROOT="${LINEAGE_ROOT}/vendor/${VENDOR}/${DEVICE_COMMON}/proprietary"
-
-"${MY_DIR}/setup-makefiles.sh"
+"${MY_DIR}/../${DEVICE}/setup-makefiles.sh"
