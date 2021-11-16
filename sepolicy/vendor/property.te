@@ -1,2 +1,2 @@
-type power_prop, property_type;
-type moto_boot_prop, property_type;
+system_internal_prop(power_prop);
+vendor_restricted_prop(moto_boot_prop);
