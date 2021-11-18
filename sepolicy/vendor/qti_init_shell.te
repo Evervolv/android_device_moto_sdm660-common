@@ -13,3 +13,5 @@ dontaudit qti_init_shell default_prop:property_service set;
 
 # Silence DAC denials
 dontaudit qti_init_shell self:capability { dac_override dac_read_search };
+
+allow qti_init_shell system_data_file:file { getattr read };
