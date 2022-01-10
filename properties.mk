@@ -107,7 +107,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Display
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.sf.enable_hwc_vds=0 \
-    debug.renderengine.backend=threaded \
+    debug.sf.enable_egl_image_tracker=true \
     debug.sf.enable_gl_backpressure=1 \
     debug.sf.hw=1 \
     debug.sf.latch_unsignaled=1 \
