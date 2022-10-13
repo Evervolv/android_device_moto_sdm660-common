@@ -61,13 +61,6 @@ BOARD_USES_ALSA_AUDIO := true
 USE_CUSTOM_AUDIO_POLICY := 1
 USE_LIB_PROCESS_GROUP := true
 
-# Bionic
-TARGET_LD_SHIM_LIBS := \
-    /vendor/lib/libmdmcutback.so|libqsapshim.so \
-    /vendor/lib64/libmdmcutback.so|libqsapshim.so \
-    /vendor/lib64/libril-qc-hal-qmi.so|libcutils_shim.so \
-    /vendor/lib/libmot_gpu_mapper.so|libgpu_mapper_shim.so
-
 # Bluetooth
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(PLATFORM_PATH)/bluetooth
 BOARD_HAVE_BLUETOOTH := true
