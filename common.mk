@@ -324,6 +324,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libjson
 
+# Device Attestation
+ifneq ($(TARGET_BUILD_VARIANT),user)
+PRODUCT_PACKAGES += \
+    AttestationOverlay
+endif
+
 # Radio
 PRODUCT_PACKAGES += \
     librmnetctl \
